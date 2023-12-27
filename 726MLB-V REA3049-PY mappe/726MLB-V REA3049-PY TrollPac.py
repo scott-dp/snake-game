@@ -77,6 +77,7 @@ while antallObjekter<=3:
     antallObjekter=len(spillObjekter)
 hinderListe=[]
 hinderListe.append(troll)
+
 # Gjenta helt til brukeren lukker vinduet
 fortsett = True
 while fortsett:
