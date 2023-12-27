@@ -51,6 +51,22 @@ class Slange(Spillobjekt):
         self.xPos += self.xFart
         self.yPos += self.yFart 
         self.tegnObjekt()
+    
+    def tegnObjekt(self):
+        if self.xFart > 0:
+            for i in range(self.length):
+                pg.draw.rect(self.vindu,self.farge,(self.xPos-self.bredde*i,self.yPos,self.bredde,self.hoyde))
+        elif self.xFart < 0:
+            for i in range(self.length):
+                pg.draw.rect(self.vindu,self.farge,(self.xPos+self.bredde*i,self.yPos,self.bredde,self.hoyde))
+        elif self.yFart > 0:
+            for i in range(self.length):
+                pg.draw.rect(self.vindu,self.farge,(self.xPos,self.yPos-self.bredde*i,self.bredde,self.hoyde))
+        elif self.yFart < 0:
+            for i in range(self.length):
+                pg.draw.rect(self.vindu,self.farge,(self.xPos,self.yPos+self.bredde*i,self.bredde,self.hoyde))
+
+
 
 class Mat(Spillobjekt):
     def __init__(self, xPos, yPos, farge, hoyde, bredde):
@@ -68,6 +84,10 @@ while fortsett:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             fortsett = False
+    
+    if slange.getRect().colliderect(mat.getRect()):
+        mat = Mat(rd.randint(0,580),rd.randint(0,580),(255,0,0),20,20)
+        slange.length+=1
     
     trykkedeTaster = pg.key.get_pressed()
 
